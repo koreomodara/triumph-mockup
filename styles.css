@@ -1218,6 +1218,10 @@ img {
     margin-bottom: 2rem;
   }
 
+  .service-countdown {
+    margin-top: 6.5rem;
+  }
+
   .hero-socials {
     display: none;
   }
