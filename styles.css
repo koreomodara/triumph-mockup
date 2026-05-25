@@ -1198,7 +1198,64 @@ img {
     font-weight: 700;
     padding: 0.25rem 0;
   }
+    .hero-section,
+  .hero-overlay {
+    min-height: 100vh;
+  }
+
+  .hero-content {
+    padding: 8rem 1.25rem 10rem;
+  }
+
+  .hero-content h1 {
+    font-size: 4.2rem;
+    line-height: 1.05;
+  }
+
+  .hero-content p {
+    font-size: 1.45rem;
+    line-height: 1.35;
+    margin-bottom: 2rem;
+  }
+
+  .hero-socials {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: .05rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1.35rem;
+    transform: none;
+    z-index: 5;
+  }
+
+  .hero-socials i {
+    font-size: 1rem;
+  }
+    .hero-top {
+    z-index: 2000;
+  }
+
+  .mobile-menu-btn {
+    position: relative;
+    z-index: 2100;
+    cursor: pointer;
+  }
+
+  .mobile-nav-menu {
+    z-index: 1999;
+  }
+
+  .mobile-nav-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    display: flex;
+  }
 }
+
 
 /* ========================================= */
 /* MOBILE MISSION CARD FIX */

@@ -59,6 +59,34 @@ window.ministrySwiper = new Swiper(".ministrySwiper", {
 });
 
 // =========================================
+// MOBILE NAV TOGGLE
+// =========================================
+
+const menuToggle = document.querySelector("#menuToggle");
+const mobileMenu = document.querySelector("#mobileMenu");
+
+if (menuToggle && mobileMenu) {
+
+  menuToggle.addEventListener("click", () => {
+    const isOpen = mobileMenu.classList.toggle("open");
+
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.innerHTML = isOpen
+      ? '<i class="bi bi-x-lg"></i>'
+      : '<i class="bi bi-list"></i>';
+  });
+
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.innerHTML = '<i class="bi bi-list"></i>';
+    });
+  });
+
+}
+
+// =========================================
 // ACTIVE NAV LINK BASED ON SCROLL POSITION
 // =========================================
 
@@ -122,7 +150,7 @@ window.addEventListener("scroll", () => {
 /* ========================================= */
 
 /* Select navbar */
-const navbar = document.querySelector(".hero-top");
+const topNavbar = document.querySelector(".hero-top");
 
 /* Stores last scroll position */
 let lastScrollY = window.scrollY;
@@ -145,13 +173,13 @@ window.addEventListener("scroll", () => {
 
   if (currentScrollY > 40) {
 
-    navbar.classList.add("scrolled");
+    topNavbar.classList.add("scrolled");
 
   } 
   
   else {
 
-    navbar.classList.remove("scrolled");
+    topNavbar.classList.remove("scrolled");
 
   }
 
@@ -172,14 +200,14 @@ window.addEventListener("scroll", () => {
   if (scrollDifference > 0 && currentScrollY > 120) {
 
     /* User scrolling down */
-    navbar.classList.add("nav-hidden");
+    topNavbar.classList.add("nav-hidden");
 
   } 
   
   else {
 
     /* User scrolling up */
-    navbar.classList.remove("nav-hidden");
+    topNavbar.classList.remove("nav-hidden");
 
   }
 
@@ -196,47 +224,34 @@ window.addEventListener("scroll", () => {
 
 const countdownTimer = document.getElementById("countdown-timer");
 
-// target date in MST / Phoenix time
-const serviceDate = new Date("2026-05-31T09:00:00-07:00").getTime();
+if (countdownTimer) {
+  // May is 4 because JS months start at 0
+  // May 31, 2026 at 9:00 AM MST = 16:00 UTC
+  const serviceDate = Date.UTC(2026, 4, 31, 16, 0, 0);
 
-function updateCountdown() {
-  const now = new Date().getTime();
-  const distance = serviceDate - now;
+  function updateCountdown() {
+    const now = Date.now();
+    const distance = serviceDate - now;
 
-  if (distance <= 0) {
-    countdownTimer.textContent = "00:00:00";
-    return;
+    if (distance <= 0) {
+      countdownTimer.textContent = "Service is live!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    countdownTimer.textContent =
+      `${days}d ${String(hours).padStart(2, "0")}:` +
+      `${String(minutes).padStart(2, "0")}:` +
+      `${String(seconds).padStart(2, "0")}`;
   }
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((distance / (1000 * 60)) % 60);
-  const seconds = Math.floor((distance / 1000) % 60);
-
-  countdownTimer.textContent =
-    `${days}d ${hours.toString().padStart(2, "0")}:` +
-    `${minutes.toString().padStart(2, "0")}:` +
-    `${seconds.toString().padStart(2, "0")}`;
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 }
-
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-// mobile menu toggle
-const menuToggle = document.getElementById("menuToggle");
-const mobileMenu = document.getElementById("mobileMenu");
-
-menuToggle.addEventListener("click", () => {
-  mobileMenu.classList.toggle("open");
-});
-
-// close mobile menu after clicking a section
-mobileMenu.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    mobileMenu.classList.remove("open");
-  });
-});
-
 
 // =========================================
 // BUTTON HOVER ANIMATION
