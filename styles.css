@@ -1219,22 +1219,10 @@ img {
   }
 
   .hero-socials {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: .05rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 1.35rem;
-    transform: none;
-    z-index: 5;
+    display: none;
   }
 
-  .hero-socials i {
-    font-size: 0rem;
-  }
-    .hero-top {
+  .hero-top {
     z-index: 2000;
   }
 
