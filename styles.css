@@ -1232,7 +1232,7 @@ img {
   }
 
   .hero-socials i {
-    font-size: 1rem;
+    font-size: 0rem;
   }
     .hero-top {
     z-index: 2000;
