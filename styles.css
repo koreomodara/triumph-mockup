@@ -1114,7 +1114,7 @@ img {
 /* FINAL MOBILE NAV OVERRIDE */
 /* ========================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
 
   .hero-top {
     position: fixed;
