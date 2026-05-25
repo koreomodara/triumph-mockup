@@ -381,6 +381,10 @@ img {
 
   margin-top: 4rem;
 
+  overflow: hidden;
+
+  border-radius: 30px;
+
 }
 
 .about-image {
@@ -388,6 +392,16 @@ img {
   height: 500px;
 
   border-radius: 30px;
+
+  transition: transform 0.8s ease;
+
+  transform-origin: center;
+
+}
+
+.about-image:hover {
+
+  transform: scale(1.06);
 
 }
 
