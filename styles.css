@@ -488,15 +488,27 @@ img {
 
   border-radius: 30px;
 
-  transition: transform 0.8s ease;
-
   transform-origin: center;
+
+  will-change: transform;
+
+}
+
+@keyframes about-image-zoom {
+
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.05);
+  }
 
 }
 
 .about-image:hover {
 
-  transform: scale(1.06);
+  animation: about-image-zoom 5s ease-in-out infinite alternate;
 
 }
 
