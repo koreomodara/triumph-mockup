@@ -219,15 +219,33 @@ window.addEventListener("scroll", () => {
 
 // =========================================
 // SERVICE COUNTDOWN
-// Sunday 5/31 at 9:00 AM MST
+// Dynamic: next Sunday at 10:00 AM (local time)
 // =========================================
 
 const countdownTimer = document.getElementById("countdown-timer");
 
 if (countdownTimer) {
-  // May is 4 because JS months start at 0
-  // May 31, 2026 at 9:00 AM MST = 16:00 UTC
-  const serviceDate = Date.UTC(2026, 4, 31, 16, 0, 0);
+
+  function getNextSunday10AM() {
+    const now = new Date();
+
+    // Calculate days until upcoming Sunday
+    const today = now.getDay(); // 0 = Sunday
+    const daysUntilSunday = (7 - today) % 7;
+
+    const candidate = new Date(now);
+    candidate.setDate(now.getDate() + daysUntilSunday);
+    candidate.setHours(10, 0, 0, 0); // 10:00:00.000 local time
+
+    // If candidate is now or in the past, move to next week's Sunday
+    if (candidate <= now) {
+      candidate.setDate(candidate.getDate() + 7);
+    }
+
+    return candidate;
+  }
+
+  const serviceDate = getNextSunday10AM().getTime();
 
   function updateCountdown() {
     const now = Date.now();
@@ -251,6 +269,7 @@ if (countdownTimer) {
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
 }
 
 // =========================================
